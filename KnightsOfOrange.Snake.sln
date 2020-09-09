@@ -5,15 +5,15 @@ VisualStudioVersion = 16.0.30104.148
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{867945A0-3ADE-4024-8EB6-940D81A1E048}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "KnightsOfOrange.Snake", "src\KnightsOfOrange.TicTacToe\KnightsOfOrange.Snake.csproj", "{59C0D21B-F4A9-4256-A037-A21483B97D4A}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "KnightsOfOrange.Engine", "src\KnightsOfOrange.Engine\KnightsOfOrange.Engine.csproj", "{ECBEB173-DC6E-496E-B0CB-33E1B3B02CFD}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{BE7F0D5B-31E1-44FD-8ED8-1279747DC898}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "KnightsOfOrange.Engine.Tests", "test\KnightsOfOrange.Engine.Tests\KnightsOfOrange.Engine.Tests.csproj", "{8DA9A775-CE8E-429F-9798-003F12EB9724}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KnightsOfOrange.Engine.Abstraction", "src\KnightsOfOrange.Engine.Abstraction\KnightsOfOrange.Engine.Abstraction.csproj", "{E83115D1-BA3A-431D-BBCF-781E206CF3C4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "KnightsOfOrange.Engine.Abstraction", "src\KnightsOfOrange.Engine.Abstraction\KnightsOfOrange.Engine.Abstraction.csproj", "{E83115D1-BA3A-431D-BBCF-781E206CF3C4}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "KnightsOfOrange.Snake", "src\KnightsOfOrange.Snake\KnightsOfOrange.Snake.csproj", "{F91FB216-2A39-4901-A2CD-F90ABF77537B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,10 +21,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{59C0D21B-F4A9-4256-A037-A21483B97D4A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{59C0D21B-F4A9-4256-A037-A21483B97D4A}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{59C0D21B-F4A9-4256-A037-A21483B97D4A}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{59C0D21B-F4A9-4256-A037-A21483B97D4A}.Release|Any CPU.Build.0 = Release|Any CPU
 		{ECBEB173-DC6E-496E-B0CB-33E1B3B02CFD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{ECBEB173-DC6E-496E-B0CB-33E1B3B02CFD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{ECBEB173-DC6E-496E-B0CB-33E1B3B02CFD}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -37,15 +33,19 @@ Global
 		{E83115D1-BA3A-431D-BBCF-781E206CF3C4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E83115D1-BA3A-431D-BBCF-781E206CF3C4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E83115D1-BA3A-431D-BBCF-781E206CF3C4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F91FB216-2A39-4901-A2CD-F90ABF77537B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F91FB216-2A39-4901-A2CD-F90ABF77537B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F91FB216-2A39-4901-A2CD-F90ABF77537B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F91FB216-2A39-4901-A2CD-F90ABF77537B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
-		{59C0D21B-F4A9-4256-A037-A21483B97D4A} = {867945A0-3ADE-4024-8EB6-940D81A1E048}
 		{ECBEB173-DC6E-496E-B0CB-33E1B3B02CFD} = {867945A0-3ADE-4024-8EB6-940D81A1E048}
 		{8DA9A775-CE8E-429F-9798-003F12EB9724} = {BE7F0D5B-31E1-44FD-8ED8-1279747DC898}
 		{E83115D1-BA3A-431D-BBCF-781E206CF3C4} = {867945A0-3ADE-4024-8EB6-940D81A1E048}
+		{F91FB216-2A39-4901-A2CD-F90ABF77537B} = {867945A0-3ADE-4024-8EB6-940D81A1E048}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {3ACD3B23-F03F-46EA-AEBF-480095A81BD7}
