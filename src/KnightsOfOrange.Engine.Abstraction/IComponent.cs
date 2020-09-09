@@ -6,6 +6,19 @@ namespace KnightsOfOrange.Engine.Abstraction
 {
     public interface IComponent
     {
-        IComponent GetComponent();
+        IGameObject Owner { get; }
+
+        string Name { get; }
+
+        TComponent GetComponent<TComponent>(string name)
+            where TComponent : class, IComponent;
+
+        IComponent GetComponent(string name);
+
+        void Update();
+
+        void LateUpdate();
+
+        void Draw();
     }
 }

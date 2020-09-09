@@ -5,12 +5,18 @@
 namespace KnightsOfOrange.TicTacToe
 {
     using System;
+    using KnightsOfOrange.Engine.Abstraction;
 
     class Program
     {
         static void Main(string[] args)
         {
             Console.WriteLine("Hello World!");
+
+            using (IGame game = new Game())
+            {
+                game.Run();
+            }
         }
     }
 }

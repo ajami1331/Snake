@@ -19,6 +19,15 @@ namespace KnightsOfOrange.Engine.Abstraction
         void BindComponent<TComponent> (TComponent component)
             where TComponent : IComponent;
 
+        TComponent GetComponent<TComponent>(string name)
+            where TComponent : class, IComponent;
+
         IComponent GetComponent(string name);
+
+        void Update();
+
+        void LateUpdate();
+
+        void Draw();
     }
 }
