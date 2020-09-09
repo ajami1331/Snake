@@ -13,7 +13,7 @@ namespace KnightsOfOrange.TicTacToe
         {
             Console.WriteLine("Hello World!");
 
-            using (IGame game = new Game())
+            using (IGame game = new TicTacToe())
             {
                 game.Run();
             }

@@ -5,10 +5,17 @@
 namespace KnightsOfOrange.TicTacToe
 {
     using System;
+    using KnightsOfOrange.Engine;
     using KnightsOfOrange.Engine.Abstraction;
 
-    public class Game : IGame
+    public class TicTacToe : Game
     {
+        public TicTacToe()
+            : base(200, 200, "Tic Tac Toe")
+        {
+
+        }
+
         public void Run()
         {
 
