@@ -5,13 +5,16 @@
 namespace KnightsOfOrange.Engine.Abstraction
 {
     using System;
+    using System.Collections.Generic;
 
-    public interface IGame : IDisposable
+    public interface IGameObjectManager
     {
-        ISceneManager SceneManager { get; }
+        IList<IGameObject> GameObjects { get; }
 
-        void Init();
+        void Update();
 
-        void AddScene(IScene scene);
+        void LateUpdate();
+
+        void Draw();
     }
 }

@@ -13,9 +13,9 @@ namespace KnightsOfOrange.TicTacToe
         {
             Console.WriteLine("Hello World!");
 
-            using (IGame game = new TicTacToe())
+            using (IGame game = new Snake())
             {
-                game.Run();
+                game.Init();
             }
         }
     }

@@ -6,12 +6,14 @@ namespace KnightsOfOrange.Engine.Abstraction
 {
     using System;
 
-    public interface IGame : IDisposable
+    public interface IScene
     {
-        ISceneManager SceneManager { get; }
+        string Id { get; }
 
-        void Init();
+        string Name { get; }
 
-        void AddScene(IScene scene);
+        IGameObjectManager GameObjectManager { get; }
+
+        void Step();
     }
 }

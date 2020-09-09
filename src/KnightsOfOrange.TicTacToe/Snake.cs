@@ -8,17 +8,19 @@ namespace KnightsOfOrange.TicTacToe
     using KnightsOfOrange.Engine;
     using KnightsOfOrange.Engine.Abstraction;
 
-    public class TicTacToe : Game
+    public class Snake : Game
     {
-        public TicTacToe()
+        public Snake()
             : base(200, 200, "Tic Tac Toe")
         {
 
         }
 
-        public void Run()
+        public override void Init()
         {
-
+            Scene scene1 = new Scene(Guid.NewGuid().ToString(), "Scene1");
+            this.AddScene(scene1);
+            this.Run();
         }
 
         public void Dispose()

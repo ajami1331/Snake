@@ -5,7 +5,7 @@ VisualStudioVersion = 16.0.30104.148
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{867945A0-3ADE-4024-8EB6-940D81A1E048}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "KnightsOfOrange.TicTacToe", "src\KnightsOfOrange.TicTacToe\KnightsOfOrange.TicTacToe.csproj", "{59C0D21B-F4A9-4256-A037-A21483B97D4A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "KnightsOfOrange.Snake", "src\KnightsOfOrange.TicTacToe\KnightsOfOrange.Snake.csproj", "{59C0D21B-F4A9-4256-A037-A21483B97D4A}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "KnightsOfOrange.Engine", "src\KnightsOfOrange.Engine\KnightsOfOrange.Engine.csproj", "{ECBEB173-DC6E-496E-B0CB-33E1B3B02CFD}"
 EndProject
