@@ -16,7 +16,6 @@ namespace KnightsOfOrange.Snake.GameObjects
         {
             this.Components.Add(new Transform(this));
             this.Components.Add(new PlayerController(this));
-            this.Components.Add(new ShapeComponent(this));
         }
     }
 }

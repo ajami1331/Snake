@@ -16,24 +16,16 @@ namespace KnightsOfOrange.Snake.GameObjects
     {
         private Vector2f partSize;
         private Color color = Color.Green;
-        private List<RectangleShape> shapes;
-        private Transform transfrom;
+        public RectangleShape Shape;
+        private float halfStep = 8f;
 
-        public ShapeComponent(IGameObject owner)
+        public ShapeComponent(IGameObject owner, Vector2f position)
             : base(owner, "ShapeComponent")
         {
             this.partSize = new Vector2f(16, 16);
-            this.shapes = new List<RectangleShape>();
-            this.transfrom = this.GetComponent<Transform>("Transform");
-            this.GrowSnake(new Vector2f(0, 0));
-        }
-
-        private void GrowSnake(Vector2f position)
-        {
-            RectangleShape newShape = new RectangleShape(this.partSize);
-            newShape.FillColor = this.color;;
-            newShape.Position = position;
-            this.shapes.Add(newShape);
+            this.Shape = new RectangleShape(this.partSize);
+            this.Shape.FillColor = this.color; ;
+            this.Shape.Position = position;
         }
 
         public override void Update()
@@ -42,15 +34,33 @@ namespace KnightsOfOrange.Snake.GameObjects
             base.Update();
         }
 
-        public override void Draw()
+        public override void LateUpdate()
         {
-            foreach (RectangleShape shape in this.shapes)
+            if (this.Shape.Position.X + this.halfStep > WindowManager.Window.Size.X)
             {
-                RectangleShape newShape = new RectangleShape(shape);
-                newShape.Position += this.transfrom.Position;
-                WindowManager.Window.Draw(newShape);
+                this.Shape.Position = new Vector2f(this.halfStep, this.Shape.Position.Y);
             }
 
+            if (this.Shape.Position.X - this.halfStep < 0)
+            {
+                this.Shape.Position = new Vector2f(WindowManager.Window.Size.X - this.halfStep, this.Shape.Position.Y);
+            }
+
+            if (this.Shape.Position.Y + this.halfStep > WindowManager.Window.Size.Y)
+            {
+                this.Shape.Position = new Vector2f(this.Shape.Position.X, this.halfStep);
+            }
+
+            if (this.Shape.Position.Y - this.halfStep < 0)
+            {
+                this.Shape.Position = new Vector2f(this.Shape.Position.X, WindowManager.Window.Size.Y - this.halfStep);
+            }
+            base.LateUpdate();
+        }
+
+        public override void Draw()
+        {
+            WindowManager.Window.Draw(Shape);
             base.Draw();
         }
     }

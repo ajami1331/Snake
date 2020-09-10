@@ -12,7 +12,7 @@ namespace KnightsOfOrange.TicTacToe
     public class Snake : Game
     {
         public Snake()
-            : base(640, 480, "Tic Tac Toe")
+            : base(640, 480, "Snake")
         {
 
         }
