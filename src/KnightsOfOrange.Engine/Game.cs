@@ -2,13 +2,12 @@
 // Copyright © 2020 KnightsOfOrange. All Rights Reserved.
 // </copyright>
 
-using SFML.System;
-
 namespace KnightsOfOrange.Engine
 {
     using System;
     using KnightsOfOrange.Engine.Abstraction;
     using SFML.Graphics;
+    using SFML.System;
     using SFML.Window;
 
     public abstract class Game : IGame
@@ -33,6 +32,9 @@ namespace KnightsOfOrange.Engine
             this.accumulator = 0.0f;
             this.clock = new Clock();
             this.SceneManager = new SceneManager();
+            this.window.KeyPressed += InputManager.OnKeyPress;
+            this.window.KeyReleased += InputManager.OnKeyRelease;
+            WindowManager.Window = this.window;
         }
 
         public void Run()

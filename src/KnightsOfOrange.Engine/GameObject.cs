@@ -9,7 +9,7 @@ namespace KnightsOfOrange.Engine
     using System.Linq;
     using KnightsOfOrange.Engine.Abstraction;
 
-    public abstract class GameObject: IGameObject
+    public class GameObject: IGameObject
     {
         protected GameObject()
             : this(Guid.NewGuid().ToString(), string.Empty)

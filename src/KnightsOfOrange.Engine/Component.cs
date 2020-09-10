@@ -10,6 +10,12 @@ namespace KnightsOfOrange.Engine
 
     public abstract class Component : IComponent
     {
+        public Component(IGameObject owner, string name)
+        {
+            this.Owner = owner;
+            this.Name = name;
+        }
+
         public IGameObject Owner { get; }
 
         public string Name { get; }

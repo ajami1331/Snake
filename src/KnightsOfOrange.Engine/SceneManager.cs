@@ -1,4 +1,4 @@
-﻿// <copyright file="Component.cs" company="KnightsOfOrange">
+﻿// <copyright file="SceneManager.cs" company="KnightsOfOrange">
 // Copyright © 2020 KnightsOfOrange. All Rights Reserved.
 // </copyright>
 
