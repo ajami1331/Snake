@@ -27,6 +27,8 @@ namespace KnightsOfOrange.Snake.GameObjects
             this.shapes = new List<ShapeComponent>();
             this.GrowSnake(this.transfrom.Position);
             this.GrowSnake(this.transfrom.Position - new Vector2f(16, 0));
+            this.GrowSnake(this.transfrom.Position - new Vector2f(32, 0));
+            this.GrowSnake(this.transfrom.Position - new Vector2f(48, 0));
             this.velocity = default(Vector2f);
             this.GoRight();
         }
@@ -39,12 +41,9 @@ namespace KnightsOfOrange.Snake.GameObjects
 
             this.lastPosition = this.shapes.Last().Shape.Position;
 
-            for (int index = this.shapes.Count - 1; index > 0; index--)
+            for (int index = this.shapes.Count - 2; index >= 0; index--)
             {
-                Vector2f dif = (this.shapes[index - 1].Shape.Position - this.shapes[index].Shape.Position);
-                int xSign = Math.Sign(dif.X);
-                int ySign = Math.Sign(dif.Y);
-                this.shapes[index].Shape.Position += new Vector2f(xSign * 8, ySign * 8);
+                this.shapes[index + 1].Shape.Position = new Vector2f(this.shapes[index].Shape.Position.X, this.shapes[index].Shape.Position.Y);
             }
 
             this.shapes.First().Shape.Position = this.transfrom.Position;
