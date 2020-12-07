@@ -27,7 +27,7 @@ namespace KnightsOfOrange.Engine
             this.width = width;
             this.height = height;
             this.title = title;
-            this.window = new RenderWindow(new VideoMode(width, height), title);
+            this.window = new RenderWindow(new VideoMode(this.width, this.height), this.title);
             this.window.Closed += this.WindowOnClosed;
             this.timeStep = 1.0f / this.frameRate;
             this.accumulator = 0.0f;

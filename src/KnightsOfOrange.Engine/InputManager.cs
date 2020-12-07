@@ -11,10 +11,8 @@ namespace KnightsOfOrange.Engine
 
     public static class InputManager
     {
-        private static Dictionary<Keyboard.Key, string> mappedEvent;
-        private static Dictionary<string, bool> isPressed;
-
-        private static event EventHandler<InputEventArgs> fireNewInput;
+        private static readonly Dictionary<Keyboard.Key, string> mappedEvent;
+        private static readonly Dictionary<string, bool> isPressed;
 
         static InputManager()
         {
@@ -31,12 +29,18 @@ namespace KnightsOfOrange.Engine
             MapKey(Keyboard.Key.Up, "up");
         }
 
+        /// <summary>Maps the key against a name.</summary>
+        /// <param name="key">The key.</param>
+        /// <param name="name">The name.</param>
         public static void MapKey(Keyboard.Key key, string name)
         {
             mappedEvent.TryAdd(key, name);
             isPressed.TryAdd(name, false);
         }
 
+        /// <summary>Called when [key press].</summary>
+        /// <param name="sender">The sender.</param>
+        /// <param name="e">The <see cref="KeyEventArgs" /> instance containing the event data.</param>
         public static void OnKeyPress(object sender, KeyEventArgs e)
         {
             if (!mappedEvent.ContainsKey(e.Code))
@@ -48,6 +52,9 @@ namespace KnightsOfOrange.Engine
             isPressed[name] = true;
         }
 
+        /// <summary>Called when [key release].</summary>
+        /// <param name="sender">The sender.</param>
+        /// <param name="e">The <see cref="KeyEventArgs" /> instance containing the event data.</param>
         public static void OnKeyRelease(object sender, KeyEventArgs e)
         {
             if (!mappedEvent.ContainsKey(e.Code))
@@ -59,19 +66,12 @@ namespace KnightsOfOrange.Engine
             isPressed[name] = false;
         }
 
+        /// <summary>Gets the state of the button.</summary>
+        /// <param name="button">The button.</param>
+        /// <returns>Returns true if button is pressed, else returns false.</returns>
         public static bool GetButton(string button)
         {
             return isPressed[button];
-        }
-    }
-
-    public class InputEventArgs
-    {
-        public string MappedInput { get;  }
-
-        public InputEventArgs(string mappedInput)
-        {
-            this.MappedInput = mappedInput;
         }
     }
 }

@@ -55,12 +55,13 @@ namespace KnightsOfOrange.Snake.Components
             {
                 this.Shape.Position = new Vector2f(this.Shape.Position.X, WindowManager.Window.Size.Y - this.halfStep);
             }
+
             base.LateUpdate();
         }
 
         public override void Draw()
         {
-            WindowManager.Window.Draw(Shape);
+            WindowManager.Window.Draw(this.Shape);
             base.Draw();
         }
     }

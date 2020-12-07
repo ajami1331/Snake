@@ -41,7 +41,7 @@ namespace KnightsOfOrange.Engine
         }
 
         public TComponent GetComponent<TComponent>(string name)
-            where TComponent: class, IComponent
+            where TComponent : class, IComponent
         {
             return this.Components.FirstOrDefault(c => c.Name.Equals(name)) as TComponent;
         }
