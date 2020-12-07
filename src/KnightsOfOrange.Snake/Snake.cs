@@ -2,7 +2,7 @@
 // Copyright © 2020 KnightsOfOrange. All Rights Reserved.
 // </copyright>
 
-namespace KnightsOfOrange.TicTacToe
+namespace KnightsOfOrange.Snake
 {
     using System;
     using KnightsOfOrange.Engine;

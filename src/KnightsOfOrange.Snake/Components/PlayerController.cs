@@ -2,7 +2,9 @@
 // Copyright © 2020 KnightsOfOrange. All Rights Reserved.
 // </copyright>
 
-namespace KnightsOfOrange.Snake.GameObjects
+using Serilog;
+
+namespace KnightsOfOrange.Snake.Components
 {
     using System;
     using System.Collections.Generic;
@@ -93,28 +95,28 @@ namespace KnightsOfOrange.Snake.GameObjects
 
         private void GoRight()
         {
-            Console.WriteLine("right");
+            Log.Information("right");
             this.velocity.X = 8;
             this.velocity.Y = 0;
         }
 
         private void GoUp()
         {
-            Console.WriteLine("up");
+            Log.Information("up");
             this.velocity.X = 0;
             this.velocity.Y = -8;
         }
 
         private void GoDown()
         {
-            Console.WriteLine("down");
+            Log.Information("down");
             this.velocity.X = 0;
             this.velocity.Y = 8;
         }
 
         private void GoLeft()
         {
-            Console.WriteLine("left");
+            Log.Information("left");
             this.velocity.X = -8;
             this.velocity.Y = 0;
         }

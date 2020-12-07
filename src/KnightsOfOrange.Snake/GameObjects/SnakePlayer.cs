@@ -8,6 +8,7 @@ namespace KnightsOfOrange.Snake.GameObjects
     using System.Collections.Generic;
     using System.Text;
     using KnightsOfOrange.Engine;
+    using KnightsOfOrange.Snake.Components;
 
     public class SnakePlayer : GameObject
     {

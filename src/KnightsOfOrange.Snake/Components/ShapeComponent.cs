@@ -2,7 +2,7 @@
 // Copyright © 2020 KnightsOfOrange. All Rights Reserved.
 // </copyright>
 
-namespace KnightsOfOrange.Snake.GameObjects
+namespace KnightsOfOrange.Snake.Components
 {
     using System;
     using System.Collections.Generic;

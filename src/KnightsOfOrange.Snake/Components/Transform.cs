@@ -2,11 +2,12 @@
 // Copyright © 2020 KnightsOfOrange. All Rights Reserved.
 // </copyright>
 
-namespace KnightsOfOrange.Snake.GameObjects
+namespace KnightsOfOrange.Snake.Components
 {
     using System;
     using KnightsOfOrange.Engine;
     using KnightsOfOrange.Engine.Abstraction;
+    using Serilog;
     using SFML.System;
 
     public class Transform : Component
@@ -21,7 +22,7 @@ namespace KnightsOfOrange.Snake.GameObjects
 
         public override void LateUpdate()
         {
-            Console.WriteLine(this.Position);
+            Log.Information(this.Position.ToString());
             base.LateUpdate();
         }
     }

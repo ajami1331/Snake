@@ -6,6 +6,7 @@ namespace KnightsOfOrange.Engine
 {
     using System;
     using KnightsOfOrange.Engine.Abstraction;
+    using Serilog;
     using SFML.Graphics;
     using SFML.System;
     using SFML.Window;
@@ -35,6 +36,11 @@ namespace KnightsOfOrange.Engine
             this.window.KeyPressed += InputManager.OnKeyPress;
             this.window.KeyReleased += InputManager.OnKeyRelease;
             WindowManager.Window = this.window;
+            Log.Logger = new LoggerConfiguration()
+                .MinimumLevel.Information()
+                .WriteTo.Console()
+                .WriteTo.File("log.txt")
+                .CreateLogger();
         }
 
         public void Run()
@@ -52,6 +58,8 @@ namespace KnightsOfOrange.Engine
                     this.window.SetFramerateLimit(this.frameRate);
                 }
             }
+
+            Log.CloseAndFlush();
         }
 
         public void Dispose()
