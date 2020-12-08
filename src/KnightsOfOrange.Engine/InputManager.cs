@@ -18,15 +18,15 @@ namespace KnightsOfOrange.Engine
         {
             this.mappedEvent = new Dictionary<Keyboard.Key, string>();
             this.isPressed = new Dictionary<string, bool>();
-            MapKey(Keyboard.Key.A, "left");
-            MapKey(Keyboard.Key.A, "left");
-            MapKey(Keyboard.Key.S, "down");
-            MapKey(Keyboard.Key.D, "right");
-            MapKey(Keyboard.Key.W, "up");
-            MapKey(Keyboard.Key.Left, "left");
-            MapKey(Keyboard.Key.Down, "down");
-            MapKey(Keyboard.Key.Right, "right");
-            MapKey(Keyboard.Key.Up, "up");
+            this.MapKey(Keyboard.Key.A, "left");
+            this.MapKey(Keyboard.Key.A, "left");
+            this.MapKey(Keyboard.Key.S, "down");
+            this.MapKey(Keyboard.Key.D, "right");
+            this.MapKey(Keyboard.Key.W, "up");
+            this.MapKey(Keyboard.Key.Left, "left");
+            this.MapKey(Keyboard.Key.Down, "down");
+            this.MapKey(Keyboard.Key.Right, "right");
+            this.MapKey(Keyboard.Key.Up, "up");
         }
 
         /// <summary>Maps the key against a name.</summary>

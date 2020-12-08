@@ -1,4 +1,8 @@
-﻿namespace KnightsOfOrange.Engine
+﻿// <copyright file="TimeManager.cs" company="KnightsOfOrange">
+// Copyright © 2020 KnightsOfOrange. All Rights Reserved.
+// </copyright>
+
+namespace KnightsOfOrange.Engine
 {
     using System;
     using System.Collections.Generic;

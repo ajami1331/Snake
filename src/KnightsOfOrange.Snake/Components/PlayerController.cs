@@ -2,8 +2,6 @@
 // Copyright © 2020 KnightsOfOrange. All Rights Reserved.
 // </copyright>
 
-using SFML.Graphics;
-
 namespace KnightsOfOrange.Snake.Components
 {
     using System;
@@ -13,6 +11,7 @@ namespace KnightsOfOrange.Snake.Components
     using KnightsOfOrange.Engine;
     using KnightsOfOrange.Engine.Abstraction;
     using Serilog;
+    using SFML.Graphics;
     using SFML.System;
 
     public class PlayerController : Component

@@ -39,21 +39,21 @@ namespace KnightsOfOrange.Engine
 
             if (this.isFrameLocked)
             {
-                _window.SetFramerateLimit(this.frameRate);
+                window.SetFramerateLimit(this.frameRate);
             }
         }
 
-        private static TimeManager _time;
+        private static TimeManager time;
 
-        public static TimeManager Time => _time ??= new TimeManager();
+        public static TimeManager Time => time ??= new TimeManager();
 
-        private static InputManager _input;
+        private static InputManager input;
 
-        public static InputManager Input => _input ??= new InputManager();
+        public static InputManager Input => input ??= new InputManager();
 
         public void Run()
         {
-            while (_window.IsOpen)
+            while (window.IsOpen)
             {
                 this.StepFrame();
             }
@@ -63,10 +63,10 @@ namespace KnightsOfOrange.Engine
 
         private void StepFrame()
         {
-            _window.Clear();
-            _window.DispatchEvents();
+            window.Clear();
+            window.DispatchEvents();
             this.SceneManager.GetCurrentScene().Step();
-            _window.Display();
+            window.Display();
             Time.DeltaTime = this.clock.Restart().AsSeconds();
             Log.Information($"FPS: {1.0f / Time.DeltaTime}");
         }
@@ -77,9 +77,9 @@ namespace KnightsOfOrange.Engine
 
         public ISceneManager SceneManager { get; }
 
-        private static RenderWindow _window;
+        private static RenderWindow window;
 
-        public static RenderWindow Window => _window;
+        public static RenderWindow Window => window;
 
         public abstract void Init();
 
