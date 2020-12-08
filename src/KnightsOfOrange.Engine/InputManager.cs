@@ -9,15 +9,15 @@ namespace KnightsOfOrange.Engine
     using KnightsOfOrange.Engine.Abstraction;
     using SFML.Window;
 
-    public static class InputManager
+    public class InputManager
     {
-        private static readonly Dictionary<Keyboard.Key, string> mappedEvent;
-        private static readonly Dictionary<string, bool> isPressed;
+        private readonly Dictionary<Keyboard.Key, string> mappedEvent;
+        private readonly Dictionary<string, bool> isPressed;
 
-        static InputManager()
+        public InputManager()
         {
-            mappedEvent = new Dictionary<Keyboard.Key, string>();
-            isPressed = new Dictionary<string, bool>();
+            this.mappedEvent = new Dictionary<Keyboard.Key, string>();
+            this.isPressed = new Dictionary<string, bool>();
             MapKey(Keyboard.Key.A, "left");
             MapKey(Keyboard.Key.A, "left");
             MapKey(Keyboard.Key.S, "down");
@@ -32,46 +32,46 @@ namespace KnightsOfOrange.Engine
         /// <summary>Maps the key against a name.</summary>
         /// <param name="key">The key.</param>
         /// <param name="name">The name.</param>
-        public static void MapKey(Keyboard.Key key, string name)
+        public void MapKey(Keyboard.Key key, string name)
         {
-            mappedEvent.TryAdd(key, name);
-            isPressed.TryAdd(name, false);
+            this.mappedEvent.TryAdd(key, name);
+            this.isPressed.TryAdd(name, false);
         }
 
         /// <summary>Called when [key press].</summary>
         /// <param name="sender">The sender.</param>
         /// <param name="e">The <see cref="KeyEventArgs" /> instance containing the event data.</param>
-        public static void OnKeyPress(object sender, KeyEventArgs e)
+        public void OnKeyPress(object sender, KeyEventArgs e)
         {
-            if (!mappedEvent.ContainsKey(e.Code))
+            if (!this.mappedEvent.ContainsKey(e.Code))
             {
                 return;
             }
 
-            string name = mappedEvent[e.Code];
-            isPressed[name] = true;
+            string name = this.mappedEvent[e.Code];
+            this.isPressed[name] = true;
         }
 
         /// <summary>Called when [key release].</summary>
         /// <param name="sender">The sender.</param>
         /// <param name="e">The <see cref="KeyEventArgs" /> instance containing the event data.</param>
-        public static void OnKeyRelease(object sender, KeyEventArgs e)
+        public void OnKeyRelease(object sender, KeyEventArgs e)
         {
-            if (!mappedEvent.ContainsKey(e.Code))
+            if (!this.mappedEvent.ContainsKey(e.Code))
             {
                 return;
             }
 
-            string name = mappedEvent[e.Code];
-            isPressed[name] = false;
+            string name = this.mappedEvent[e.Code];
+            this.isPressed[name] = false;
         }
 
         /// <summary>Gets the state of the button.</summary>
         /// <param name="button">The button.</param>
         /// <returns>Returns true if button is pressed, else returns false.</returns>
-        public static bool GetButton(string button)
+        public bool GetButton(string button)
         {
-            return isPressed[button];
+            return this.isPressed[button];
         }
     }
 }

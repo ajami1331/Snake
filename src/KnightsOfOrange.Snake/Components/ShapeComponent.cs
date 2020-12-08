@@ -23,37 +23,38 @@ namespace KnightsOfOrange.Snake.Components
             : base(owner, "ShapeComponent")
         {
             this.partSize = new Vector2f(16, 16);
-            this.Shape = new RectangleShape(this.partSize);
-            this.Shape.FillColor = this.color; ;
-            this.Shape.Position = position;
+            this.Shape = new RectangleShape(this.partSize)
+            {
+                FillColor = this.color,
+                Position = position,
+            };
         }
 
         public override void Update()
         {
-
             base.Update();
         }
 
         public override void LateUpdate()
         {
-            if (this.Shape.Position.X + this.halfStep > WindowManager.Window.Size.X)
+            if (this.Shape.Position.X + this.halfStep > Game.Window.Size.X)
             {
                 this.Shape.Position = new Vector2f(this.halfStep, this.Shape.Position.Y);
             }
 
-            if (this.Shape.Position.X - this.halfStep < 0)
+            if (this.Shape.Position.X < 0)
             {
-                this.Shape.Position = new Vector2f(WindowManager.Window.Size.X - this.halfStep, this.Shape.Position.Y);
+                this.Shape.Position = new Vector2f(Game.Window.Size.X - this.halfStep, this.Shape.Position.Y);
             }
 
-            if (this.Shape.Position.Y + this.halfStep > WindowManager.Window.Size.Y)
+            if (this.Shape.Position.Y + this.halfStep > Game.Window.Size.Y)
             {
                 this.Shape.Position = new Vector2f(this.Shape.Position.X, this.halfStep);
             }
 
-            if (this.Shape.Position.Y - this.halfStep < 0)
+            if (this.Shape.Position.Y < 0)
             {
-                this.Shape.Position = new Vector2f(this.Shape.Position.X, WindowManager.Window.Size.Y - this.halfStep);
+                this.Shape.Position = new Vector2f(this.Shape.Position.X, Game.Window.Size.Y - this.halfStep);
             }
 
             base.LateUpdate();
@@ -61,7 +62,7 @@ namespace KnightsOfOrange.Snake.Components
 
         public override void Draw()
         {
-            WindowManager.Window.Draw(this.Shape);
+            Game.Window.Draw(this.Shape);
             base.Draw();
         }
     }

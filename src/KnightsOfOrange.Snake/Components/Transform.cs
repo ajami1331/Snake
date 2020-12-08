@@ -22,7 +22,6 @@ namespace KnightsOfOrange.Snake.Components
 
         public override void LateUpdate()
         {
-            Log.Information(this.Position.ToString());
             base.LateUpdate();
         }
     }

@@ -16,50 +16,59 @@ namespace KnightsOfOrange.Engine
         private uint width;
         private uint height;
         private string title;
-        private RenderWindow window;
         private uint frameRate = 30;
-        private float accumulator;
-        private float timeStep;
         private Clock clock;
+        private bool isFrameLocked = true;
 
         protected Game(uint width, uint height, string title)
         {
             this.width = width;
             this.height = height;
             this.title = title;
-            this.window = new RenderWindow(new VideoMode(this.width, this.height), this.title);
-            this.window.Closed += this.WindowOnClosed;
-            this.timeStep = 1.0f / this.frameRate;
-            this.accumulator = 0.0f;
+            _window = new RenderWindow(new VideoMode(this.width, this.height), this.title);
+            _window.Closed += this.WindowOnClosed;
             this.clock = new Clock();
             this.SceneManager = new SceneManager();
-            this.window.KeyPressed += InputManager.OnKeyPress;
-            this.window.KeyReleased += InputManager.OnKeyRelease;
-            WindowManager.Window = this.window;
+            _window.KeyPressed += Input.OnKeyPress;
+            _window.KeyReleased += Input.OnKeyRelease;
             Log.Logger = new LoggerConfiguration()
                 .MinimumLevel.Information()
                 .WriteTo.Console()
                 .WriteTo.File("log.txt")
                 .CreateLogger();
+
+            if (this.isFrameLocked)
+            {
+                _window.SetFramerateLimit(this.frameRate);
+            }
         }
+
+        private static TimeManager _time;
+
+        public static TimeManager Time => _time ??= new TimeManager();
+
+        private static InputManager _input;
+
+        public static InputManager Input => _input ??= new InputManager();
 
         public void Run()
         {
-            while (this.window.IsOpen)
+            while (_window.IsOpen)
             {
-                this.accumulator += this.clock.Restart().AsSeconds();
-                while (this.accumulator >= this.timeStep)
-                {
-                    this.window.Clear();
-                    this.window.DispatchEvents();
-                    this.SceneManager.GetCurrentScene().Step();
-                    this.window.Display();
-                    this.clock.Restart();
-                    this.window.SetFramerateLimit(this.frameRate);
-                }
+                this.StepFrame();
             }
 
             Log.CloseAndFlush();
+        }
+
+        private void StepFrame()
+        {
+            _window.Clear();
+            _window.DispatchEvents();
+            this.SceneManager.GetCurrentScene().Step();
+            _window.Display();
+            Time.DeltaTime = this.clock.Restart().AsSeconds();
+            Log.Information($"FPS: {1.0f / Time.DeltaTime}");
         }
 
         public void Dispose()
@@ -67,6 +76,10 @@ namespace KnightsOfOrange.Engine
         }
 
         public ISceneManager SceneManager { get; }
+
+        private static RenderWindow _window;
+
+        public static RenderWindow Window => _window;
 
         public abstract void Init();
 
@@ -83,8 +96,6 @@ namespace KnightsOfOrange.Engine
             }
 
             (sender as RenderWindow ?? throw new ArgumentNullException(nameof(sender))).Close();
-
-            this.accumulator = 0;
         }
     }
 }

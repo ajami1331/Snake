@@ -2,6 +2,8 @@
 // Copyright © 2020 KnightsOfOrange. All Rights Reserved.
 // </copyright>
 
+using SFML.Graphics;
+
 namespace KnightsOfOrange.Snake.Components
 {
     using System;
@@ -17,9 +19,18 @@ namespace KnightsOfOrange.Snake.Components
     {
         private Transform transfrom;
         private Vector2f velocity;
-        private float halfStep = 8f;
         private IList<ShapeComponent> shapes;
         private Vector2f lastPosition;
+        private Direction currentDirection = Direction.Right;
+        private float movementSpeed = 500;
+
+        private enum Direction
+        {
+            Left,
+            Up,
+            Right,
+            Down,
+        }
 
         public PlayerController(IGameObject owner)
             : base(owner, "PlayerController")
@@ -27,15 +38,18 @@ namespace KnightsOfOrange.Snake.Components
             this.transfrom = this.GetComponent<Transform>("Transform");
             this.shapes = new List<ShapeComponent>();
             this.GrowSnake(this.transfrom.Position);
-            this.GrowSnake(this.transfrom.Position - new Vector2f(16, 0));
-            this.GrowSnake(this.transfrom.Position - new Vector2f(32, 0));
-            this.GrowSnake(this.transfrom.Position - new Vector2f(48, 0));
             this.velocity = default(Vector2f);
             this.GoRight();
         }
 
         public override void Update()
         {
+            for (int i = 0; i < this.shapes.Count; i++)
+            {
+
+                this.shapes[i].Shape.FillColor = Color.Green;
+            }
+
             this.CheckAndSetVelocity();
 
             this.ApplyVelocityAndVerify();
@@ -52,6 +66,28 @@ namespace KnightsOfOrange.Snake.Components
             base.Update();
         }
 
+        public override void LateUpdate()
+        {
+            for (int i = 1; i < this.shapes.Count; i++)
+            {
+                if (this.IsCollision(this.shapes[i].Shape.GetGlobalBounds(), this.shapes[0].Shape.GetGlobalBounds()))
+                {
+                    this.shapes[i].Shape.FillColor = Color.Red;
+                    this.shapes[0].Shape.FillColor = Color.Blue;
+                }
+            }
+
+            base.LateUpdate();
+        }
+
+        private bool IsCollision(FloatRect rect1, FloatRect rect2)
+        {
+            return rect1.Left < rect2.Left + rect2.Width &&
+                    rect1.Left + rect1.Width > rect2.Left &&
+                    rect1.Top < rect2.Top + rect2.Height &&
+                    rect1.Top + rect1.Height > rect2.Top;
+        }
+
         public override void Draw()
         {
             this.transfrom.Position = this.shapes.First().Shape.Position;
@@ -66,27 +102,27 @@ namespace KnightsOfOrange.Snake.Components
 
         private void ApplyVelocityAndVerify()
         {
-            this.transfrom.Position += this.velocity;
+            this.transfrom.Position += this.velocity * Game.Time.DeltaTime * this.movementSpeed;
         }
 
         private void CheckAndSetVelocity()
         {
-            if (InputManager.GetButton("left"))
+            if (Game.Input.GetButton("left") && this.currentDirection != Direction.Right)
             {
                 this.GoLeft();
             }
 
-            if (InputManager.GetButton("right"))
+            if (Game.Input.GetButton("right") && this.currentDirection != Direction.Left)
             {
                 this.GoRight();
             }
 
-            if (InputManager.GetButton("up"))
+            if (Game.Input.GetButton("up") && this.currentDirection != Direction.Down)
             {
                 this.GoUp();
             }
 
-            if (InputManager.GetButton("down"))
+            if (Game.Input.GetButton("down") && this.currentDirection != Direction.Up)
             {
                 this.GoDown();
             }
@@ -94,30 +130,30 @@ namespace KnightsOfOrange.Snake.Components
 
         private void GoRight()
         {
-            Log.Information("right");
-            this.velocity.X = 8;
+            this.velocity.X = 1;
             this.velocity.Y = 0;
+            this.currentDirection = Direction.Right;
         }
 
         private void GoUp()
         {
-            Log.Information("up");
             this.velocity.X = 0;
-            this.velocity.Y = -8;
+            this.velocity.Y = -1;
+            this.currentDirection = Direction.Up;
         }
 
         private void GoDown()
         {
-            Log.Information("down");
             this.velocity.X = 0;
-            this.velocity.Y = 8;
+            this.velocity.Y = 1;
+            this.currentDirection = Direction.Down;
         }
 
         private void GoLeft()
         {
-            Log.Information("left");
-            this.velocity.X = -8;
+            this.velocity.X = -1;
             this.velocity.Y = 0;
+            this.currentDirection = Direction.Left;
         }
     }
 }
