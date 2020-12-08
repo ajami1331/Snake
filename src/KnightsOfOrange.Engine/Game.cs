@@ -25,12 +25,12 @@ namespace KnightsOfOrange.Engine
             this.width = width;
             this.height = height;
             this.title = title;
-            _window = new RenderWindow(new VideoMode(this.width, this.height), this.title);
-            _window.Closed += this.WindowOnClosed;
+            window = new RenderWindow(new VideoMode(this.width, this.height), this.title);
+            window.Closed += this.WindowOnClosed;
             this.clock = new Clock();
             this.SceneManager = new SceneManager();
-            _window.KeyPressed += Input.OnKeyPress;
-            _window.KeyReleased += Input.OnKeyRelease;
+            window.KeyPressed += Input.OnKeyPress;
+            window.KeyReleased += Input.OnKeyRelease;
             Log.Logger = new LoggerConfiguration()
                 .MinimumLevel.Information()
                 .WriteTo.Console()
