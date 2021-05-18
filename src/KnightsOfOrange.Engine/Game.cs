@@ -34,7 +34,7 @@ namespace KnightsOfOrange.Engine
             Log.Logger = new LoggerConfiguration()
                 .MinimumLevel.Information()
                 .WriteTo.Console()
-                .WriteTo.File("log.txt")
+                .WriteTo.File(".log", rollingInterval: RollingInterval.Day)
                 .CreateLogger();
 
             if (this.isFrameLocked)
