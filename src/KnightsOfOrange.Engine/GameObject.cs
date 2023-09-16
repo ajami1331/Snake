@@ -1,5 +1,5 @@
 ﻿// <copyright file="GameObject.cs" company="KnightsOfOrange">
-// Copyright © 2020 KnightsOfOrange. All Rights Reserved.
+// Copyright © 2020,2023 KnightsOfOrange. All Rights Reserved.
 // </copyright>
 
 namespace KnightsOfOrange.Engine
@@ -25,54 +25,22 @@ namespace KnightsOfOrange.Engine
         {
             this.Id = id;
             this.Name = name;
-            this.Components = new List<IComponent>();
         }
 
         public string Id { get; }
 
         public string Name { get; set; }
 
-        public IList<IComponent> Components { get; }
-
-        public void BindComponent<TComponent>(TComponent component)
-            where TComponent : IComponent
-        {
-            this.Components.Add(component);
+        public virtual void Update()
+        { 
         }
 
-        public TComponent GetComponent<TComponent>(string name)
-            where TComponent : class, IComponent
+        public virtual void LateUpdate()
         {
-            return this.Components.FirstOrDefault(c => c.Name.Equals(name)) as TComponent;
         }
 
-        public IComponent GetComponent(string name)
+        public virtual void Draw()
         {
-            return this.Components.FirstOrDefault(c => c.Name.Equals(name));
-        }
-
-        public void Update()
-        {
-            foreach (IComponent component in this.Components)
-            {
-                component.Update();
-            }
-        }
-
-        public void LateUpdate()
-        {
-            foreach (IComponent component in this.Components)
-            {
-                component.LateUpdate();
-            }
-        }
-
-        public void Draw()
-        {
-            foreach (IComponent component in this.Components)
-            {
-                component.Draw();
-            }
         }
     }
 }

@@ -1,5 +1,5 @@
 ﻿// <copyright file="GameObjectManager.cs" company="KnightsOfOrange">
-// Copyright © 2020 KnightsOfOrange. All Rights Reserved.
+// Copyright © 2020,2023 KnightsOfOrange. All Rights Reserved.
 // </copyright>
 
 namespace KnightsOfOrange.Engine
@@ -14,12 +14,16 @@ namespace KnightsOfOrange.Engine
         public GameObjectManager()
         {
             this.GameObjects = new List<IGameObject>();
+            this.tempGameObjects = new List<IGameObject>();
         }
 
         public IList<IGameObject> GameObjects { get; }
 
+        private readonly List<IGameObject> tempGameObjects;
+
         public void Update()
         {
+            this.MoveTempGameObjectsToMainList();
             foreach (IGameObject gameObject in this.GameObjects)
             {
                 gameObject.Update();
@@ -28,6 +32,7 @@ namespace KnightsOfOrange.Engine
 
         public void LateUpdate()
         {
+            this.MoveTempGameObjectsToMainList();
             foreach (IGameObject gameObject in this.GameObjects)
             {
                 gameObject.LateUpdate();
@@ -36,10 +41,26 @@ namespace KnightsOfOrange.Engine
 
         public void Draw()
         {
+            this.MoveTempGameObjectsToMainList();
             foreach (IGameObject gameObject in this.GameObjects)
             {
                 gameObject.Draw();
             }
+        }
+
+        public void AddGameObject(IGameObject gameObject)
+        {
+            this.tempGameObjects.Add(gameObject);
+        }
+
+        private void MoveTempGameObjectsToMainList()
+        {
+            foreach (IGameObject gameObject in this.tempGameObjects)
+            {
+                this.GameObjects.Add(gameObject);
+            }
+
+            this.tempGameObjects.Clear();
         }
     }
 }

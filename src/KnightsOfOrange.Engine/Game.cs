@@ -1,5 +1,5 @@
 ﻿// <copyright file="Game.cs" company="KnightsOfOrange">
-// Copyright © 2020 KnightsOfOrange. All Rights Reserved.
+// Copyright © 2020,2023 KnightsOfOrange. All Rights Reserved.
 // </copyright>
 
 namespace KnightsOfOrange.Engine
@@ -68,7 +68,7 @@ namespace KnightsOfOrange.Engine
             this.SceneManager.GetCurrentScene().Step();
             window.Display();
             Time.DeltaTime = this.clock.Restart().AsSeconds();
-            Log.Information($"FPS: {1.0f / Time.DeltaTime}");
+            Log.Information("FPS: {fps}", 1.0f / Time.DeltaTime);
         }
 
         public void Dispose()

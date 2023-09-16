@@ -1,5 +1,5 @@
 ﻿// <copyright file="Snake.cs" company="KnightsOfOrange">
-// Copyright © 2020 KnightsOfOrange. All Rights Reserved.
+// Copyright © 2020,2023 KnightsOfOrange. All Rights Reserved.
 // </copyright>
 
 namespace KnightsOfOrange.Snake
@@ -20,7 +20,7 @@ namespace KnightsOfOrange.Snake
         public override void Init()
         {
             Scene scene1 = new Scene(Guid.NewGuid().ToString(), "Scene1");
-            scene1.GameObjectManager.GameObjects.Add(new SnakePlayer());
+            new SnakePlayer(scene1);
             this.AddScene(scene1);
             this.Run();
         }
