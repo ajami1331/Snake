@@ -21,7 +21,15 @@ namespace KnightsOfOrange.Engine
 
         public IList<IScene> Scenes { get; }
 
-        public IScene GetCurrentScene()
+        public IScene CurrentScene => this.GetCurrentScene();
+
+        public IScene CreateScene(string id, string name)
+        {
+            this.Scenes.Add(new Scene(id, name));
+            return this.Scenes.Last();
+        }
+
+        private IScene GetCurrentScene()
         {
             if (this.CurrentSceneIndex >= this.Scenes.Count)
             {
@@ -29,11 +37,6 @@ namespace KnightsOfOrange.Engine
             }
 
             return this.Scenes[this.CurrentSceneIndex];
-        }
-
-        public void AddScene(IScene scene)
-        {
-            this.Scenes.Add(scene);
         }
     }
 }

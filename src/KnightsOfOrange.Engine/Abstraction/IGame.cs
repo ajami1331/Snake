@@ -8,10 +8,14 @@ namespace KnightsOfOrange.Engine.Abstraction
 
     public interface IGame : IDisposable
     {
-        ISceneManager SceneManager { get; }
+        static ISceneManager SceneManager { get; }
+
+        static InputManager Input { get; }
+
+        static TimeManager Time { get; }
 
         void Init();
 
-        void AddScene(IScene scene);
+        IScene CreateScene(string id, string name);
     }
 }

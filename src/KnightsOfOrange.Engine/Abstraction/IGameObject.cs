@@ -14,6 +14,8 @@ namespace KnightsOfOrange.Engine.Abstraction
 
         string Name { get; set; }
 
+        IScene Scene { get; }
+
         void Update();
 
         void LateUpdate();

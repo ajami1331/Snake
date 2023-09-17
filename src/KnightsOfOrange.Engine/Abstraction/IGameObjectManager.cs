@@ -18,5 +18,7 @@ namespace KnightsOfOrange.Engine.Abstraction
         void Draw();
 
         void AddGameObject(IGameObject gameObject);
+
+        IGameObject GetGameObjectByName(string name);
     }
 }

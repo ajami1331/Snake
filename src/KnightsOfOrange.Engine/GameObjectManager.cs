@@ -53,6 +53,11 @@ namespace KnightsOfOrange.Engine
             this.tempGameObjects.Add(gameObject);
         }
 
+        public IGameObject GetGameObjectByName(string name)
+        {
+           return this.GameObjects.FirstOrDefault(go => go.Name == name) ?? this.tempGameObjects.First(go => go.Name == name);
+        }
+
         private void MoveTempGameObjectsToMainList()
         {
             foreach (IGameObject gameObject in this.tempGameObjects)

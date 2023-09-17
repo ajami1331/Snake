@@ -7,7 +7,6 @@ namespace KnightsOfOrange.Snake.GameObjects
     using System;
     using System.Collections.Generic;
     using System.Linq;
-    using System.Text;
     using KnightsOfOrange.Engine;
     using SFML.Graphics;
     using SFML.System;
@@ -16,13 +15,12 @@ namespace KnightsOfOrange.Snake.GameObjects
     {
         private Vector2f position;
         private Vector2f velocity;
-        private IList<ShapeObject> shapes;
+        private IList<SnakePart> shapes;
         private Vector2f lastPosition;
         private Direction currentDirection = Direction.Right;
         private float accumlatedTimeSinceLastMove = 0f;
         private readonly float movementWindow = 0.1f;
         private int lim = 6;
-        private readonly Scene currentScene;
 
         private enum Direction
         {
@@ -32,17 +30,17 @@ namespace KnightsOfOrange.Snake.GameObjects
             Down,
         }
 
-        public SnakePlayer(Scene currentScene)
+        public IList<SnakePart> Shapes => this.shapes;
+
+        public SnakePlayer()
             : base("Player")
         {
-            this.shapes = new List<ShapeObject>();
-            this.position = new Vector2f(100, 100);
+            Random random = new Random();
+            this.shapes = new List<SnakePart>();
+            this.position = new Vector2f(random.Next(0, (int)Game.Window.Size.X / 16) * 16, random.Next(0, (int)Game.Window.Size.Y / 16) * 16);
             this.velocity = default(Vector2f);
             this.GoRight();
-            this.currentScene = currentScene ?? throw new ArgumentNullException();
-            this.currentScene.GameObjectManager.AddGameObject(this);
             this.GrowSnake(this.position);
-            this.GrowSnake(new Vector2f(this.shapes.Last().Shape.Position.X - this.shapes.First().Shape.Size.X, this.shapes.Last().Shape.Position.Y));
         }
 
         public override void Update()
@@ -69,7 +67,7 @@ namespace KnightsOfOrange.Snake.GameObjects
             base.LateUpdate();
         }
 
-        private bool IsCollision(FloatRect rect1, FloatRect rect2)
+        public bool IsCollision(FloatRect rect1, FloatRect rect2)
         {
             return rect1.Left < rect2.Left + rect2.Width &&
                     rect1.Left + rect1.Width > rect2.Left &&
@@ -83,9 +81,14 @@ namespace KnightsOfOrange.Snake.GameObjects
             base.Draw();
         }
 
+        public void GrowSnake()
+        {
+            this.GrowSnake(this.lastPosition);
+        }
+
         private void GrowSnake(Vector2f position)
         {
-            this.shapes.Add(new ShapeObject(position, this.currentScene));
+            this.shapes.Add(new SnakePart(position));
         }
 
         private void ApplyVelocityAndVerify()
@@ -113,16 +116,6 @@ namespace KnightsOfOrange.Snake.GameObjects
 
                 this.shapes[i].Shape.FillColor = Color.Green;
             }
-
-
-            if (lim <= 0)
-            {
-                return;
-            }
-
-            this.GrowSnake(this.lastPosition);
-
-            lim--;
         }
 
         private void CheckAndSetVelocity()

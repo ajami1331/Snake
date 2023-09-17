@@ -9,7 +9,7 @@ namespace KnightsOfOrange.Engine
     using System.Linq;
     using KnightsOfOrange.Engine.Abstraction;
 
-    public class GameObject: IGameObject
+    public class GameObject : IGameObject
     {
         protected GameObject()
             : this(Guid.NewGuid().ToString(), string.Empty)
@@ -25,14 +25,18 @@ namespace KnightsOfOrange.Engine
         {
             this.Id = id;
             this.Name = name;
+            this.Scene = Game.SceneManager.CurrentScene;
+            this.Scene.GameObjectManager.AddGameObject(this);
         }
 
         public string Id { get; }
 
         public string Name { get; set; }
 
+        public IScene Scene { get; private set; }
+
         public virtual void Update()
-        { 
+        {
         }
 
         public virtual void LateUpdate()

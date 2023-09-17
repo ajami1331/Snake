@@ -25,12 +25,11 @@ namespace KnightsOfOrange.Engine
             this.width = width;
             this.height = height;
             this.title = title;
-            window = new RenderWindow(new VideoMode(this.width, this.height), this.title);
-            window.Closed += this.WindowOnClosed;
+            Window = new RenderWindow(new VideoMode(this.width, this.height), this.title);
+            Window.Closed += this.WindowOnClosed;
             this.clock = new Clock();
-            this.SceneManager = new SceneManager();
-            window.KeyPressed += Input.OnKeyPress;
-            window.KeyReleased += Input.OnKeyRelease;
+            Window.KeyPressed += Input.OnKeyPress;
+            Window.KeyReleased += Input.OnKeyRelease;
             Log.Logger = new LoggerConfiguration()
                 .MinimumLevel.Information()
                 .WriteTo.Console()
@@ -39,21 +38,17 @@ namespace KnightsOfOrange.Engine
 
             if (this.isFrameLocked)
             {
-                window.SetFramerateLimit(this.frameRate);
+                Window.SetFramerateLimit(this.frameRate);
             }
         }
 
-        private static TimeManager time;
+        public static TimeManager Time { get; } = new TimeManager();
 
-        public static TimeManager Time => time ??= new TimeManager();
-
-        private static InputManager input;
-
-        public static InputManager Input => input ??= new InputManager();
+        public static InputManager Input { get; } = new InputManager();
 
         public void Run()
         {
-            while (window.IsOpen)
+            while (Window.IsOpen)
             {
                 this.StepFrame();
             }
@@ -63,10 +58,10 @@ namespace KnightsOfOrange.Engine
 
         private void StepFrame()
         {
-            window.Clear();
-            window.DispatchEvents();
-            this.SceneManager.GetCurrentScene().Step();
-            window.Display();
+            Window.Clear();
+            Window.DispatchEvents();
+            SceneManager.CurrentScene.Step();
+            Window.Display();
             Time.DeltaTime = this.clock.Restart().AsSeconds();
             Log.Information("FPS: {fps}", 1.0f / Time.DeltaTime);
         }
@@ -75,17 +70,15 @@ namespace KnightsOfOrange.Engine
         {
         }
 
-        public ISceneManager SceneManager { get; }
+        public static ISceneManager SceneManager { get; private set; } = new SceneManager();
 
-        private static RenderWindow window;
-
-        public static RenderWindow Window => window;
+        public static RenderWindow Window { get; private set; }
 
         public abstract void Init();
 
-        public void AddScene(IScene scene)
+        public IScene CreateScene(string id, string name)
         {
-            this.SceneManager.AddScene(scene);
+            return SceneManager.CreateScene(id, name);
         }
 
         private void WindowOnClosed(object? sender, EventArgs e)
