@@ -12,20 +12,20 @@ namespace KnightsOfOrange.Engine
     public class GameObject : IGameObject
     {
         protected GameObject()
-            : this(Guid.NewGuid().ToString(), string.Empty)
+            : this(Guid.NewGuid().ToString(), string.Empty, Game.SceneManager.CurrentScene)
         {
         }
 
-        protected GameObject(string name)
-            : this(Guid.NewGuid().ToString(), name)
+        protected GameObject(string name, IScene scene)
+            : this(Guid.NewGuid().ToString(), name, scene)
         {
         }
 
-        protected GameObject(string id, string name)
+        protected GameObject(string id, string name, IScene scene)
         {
             this.Id = id;
             this.Name = name;
-            this.Scene = Game.SceneManager.CurrentScene;
+            this.Scene = scene;
             this.Scene.GameObjectManager.AddGameObject(this);
         }
 

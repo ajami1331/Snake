@@ -7,6 +7,7 @@ namespace KnightsOfOrange.Engine
     using System;
     using System.Collections.Generic;
     using System.Linq;
+    using System.Xml.Linq;
     using KnightsOfOrange.Engine.Abstraction;
 
     public class SceneManager : ISceneManager
@@ -22,6 +23,12 @@ namespace KnightsOfOrange.Engine
         public IList<IScene> Scenes { get; }
 
         public IScene CurrentScene => this.GetCurrentScene();
+
+        public IScene AddScene(IScene scene)
+        {
+            this.Scenes.Add(scene);
+            return scene;
+        }
 
         public IScene CreateScene(string id, string name)
         {

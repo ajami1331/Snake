@@ -8,6 +8,7 @@ namespace KnightsOfOrange.Snake.GameObjects
     using System.Collections.Generic;
     using System.Linq;
     using KnightsOfOrange.Engine;
+    using KnightsOfOrange.Engine.Abstraction;
     using SFML.Graphics;
     using SFML.System;
 
@@ -33,7 +34,11 @@ namespace KnightsOfOrange.Snake.GameObjects
         public IList<SnakePart> Shapes => this.shapes;
 
         public SnakePlayer()
-            : base("Player")
+            : this(Game.SceneManager.CurrentScene)
+        { }
+
+        public SnakePlayer(IScene scene)
+            : base("Player", scene)
         {
             Random random = new Random();
             this.shapes = new List<SnakePart>();
@@ -88,7 +93,7 @@ namespace KnightsOfOrange.Snake.GameObjects
 
         private void GrowSnake(Vector2f position)
         {
-            this.shapes.Add(new SnakePart(position));
+            this.shapes.Add(new SnakePart(position, this.Scene));
         }
 
         private void ApplyVelocityAndVerify()

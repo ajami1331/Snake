@@ -18,10 +18,9 @@ namespace KnightsOfOrange.Snake.GameObjects
         private Vector2f partSize;
         private Color color = Color.Green;
         public RectangleShape Shape;
-        private float halfStep = 8f;
 
-        public SnakePart(Vector2f position)
-            : base("ShapeObject")
+        public SnakePart(Vector2f position, IScene scene)
+            : base("SnakePart", scene)
         {
             this.partSize = new Vector2f(16, 16);
             this.Shape = new RectangleShape(this.partSize)

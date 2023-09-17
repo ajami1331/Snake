@@ -90,5 +90,10 @@ namespace KnightsOfOrange.Engine
 
             (sender as RenderWindow ?? throw new ArgumentNullException(nameof(sender))).Close();
         }
+
+        public IScene AddScene(IScene scene)
+        {
+            return SceneManager.AddScene(scene);
+        }
     }
 }

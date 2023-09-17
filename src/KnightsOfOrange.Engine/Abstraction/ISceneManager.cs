@@ -16,6 +16,8 @@ namespace KnightsOfOrange.Engine.Abstraction
 
         IScene CurrentScene { get; }
 
+        IScene AddScene(IScene scene);
+
         IScene CreateScene(string id, string name);
     }
 }

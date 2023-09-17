@@ -6,6 +6,7 @@ namespace KnightsOfOrange.Snake.GameObjects
 {
     using System;
     using KnightsOfOrange.Engine;
+    using KnightsOfOrange.Engine.Abstraction;
     using SFML.Graphics;
     using SFML.System;
 
@@ -17,8 +18,8 @@ namespace KnightsOfOrange.Snake.GameObjects
         private float halfStep = 8f;
         private SnakePlayer player;
 
-        public Apple()
-            : base("Apple")
+        public Apple(IScene scene)
+            : base("Apple", scene)
         {
             this.partSize = new Vector2f(16, 16);
             Random random = new Random();
@@ -27,7 +28,7 @@ namespace KnightsOfOrange.Snake.GameObjects
                 FillColor = this.color,
                 Position = new Vector2f(random.Next(0, (int)Game.Window.Size.X / 16) * 16, random.Next(0, (int)Game.Window.Size.Y / 16) * 16),
             };
-            this.player = (SnakePlayer)Game.SceneManager.CurrentScene.GameObjectManager.GetGameObjectByName("Player");
+            this.player = (SnakePlayer)scene.GameObjectManager.GetGameObjectByName("Player");
         }
 
         public override void Update()

@@ -9,6 +9,7 @@ namespace KnightsOfOrange.Snake
     using KnightsOfOrange.Engine;
     using KnightsOfOrange.Engine.Abstraction;
     using KnightsOfOrange.Snake.GameObjects;
+    using KnightsOfOrange.Snake.Scenes;
 
     public class Snake : Game
     {
@@ -20,9 +21,7 @@ namespace KnightsOfOrange.Snake
 
         public override void Init()
         {
-            var scene1 = this.CreateScene(Guid.NewGuid().ToString(), "Scene1");
-            new SnakePlayer();
-            new Apple();
+            this.AddScene(new Gameplay());
             this.Run();
         }
 
